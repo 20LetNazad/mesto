@@ -1,7 +1,7 @@
 .cards {
     max-width: 880px;
     margin: 0 auto;
-    padding: 50px 0 66px 0;
+    padding-top: 50px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -17,6 +17,6 @@
 @media screen and (max-width: 767px) {
     .cards {
         padding-top: 36px;
-        padding-bottom: 48px;
+        padding-bottom: 0;
     }
 }
