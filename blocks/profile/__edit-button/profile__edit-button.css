@@ -19,7 +19,11 @@
 
 @media screen and (max-width: 767px) {
     .profife__edit-button {
-        margin-top: 3px;
-        margin-left: 10px;
+        margin-top: 8px;
+        margin-left: 0;
+        width: 18px;
+        height: 18px;
+        background-position: center;
+        background-size: contain;
     }
 }
