@@ -4,6 +4,7 @@
     height: 24px;
     margin: 15px 0 0 18px;
     transition: opacity 0.2s;
+    cursor: pointer;
 }
 
 .profile__edit-button:hover {
