@@ -21,7 +21,7 @@
                     <div class="profile__info">
                         <div class="profile__edit">
                             <h1 class="profile__nickmane">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button"></button>
+                            <button aria-label="Редактировать профиль" class="profile__edit-button"></button>
                         </div>
                         <p class="profile__description">Исследователь океана</p>
                     </div>
@@ -38,7 +38,7 @@
                             <div class="element__like"></div>
                         </div>
                     </li>
-                    <li class="element">
+                    <li class="cards__item element">
                         <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус"
                             class="element__image">
                         <div class="element__info">
@@ -46,14 +46,14 @@
                             <div class="element__like"></div>
                         </div>
                     </li>
-                    <li class="element">
+                    <li class="cards__item element">
                         <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="element__image">
                         <div class="element__info">
                             <h2 class="element__title">Домбай</h2>
                             <div class="element__like"></div>
                         </div>
                     </li>
-                    <li class="element">
+                    <li class="cards__item element">
                         <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус"
                             class="element__image">
                         <div class="element__info">
@@ -61,14 +61,14 @@
                             <div class="element__like"></div>
                         </div>
                     </li>
-                    <li class="element">
+                    <li class="cards__item element">
                         <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай" class="element__image">
                         <div class="element__info">
                             <h2 class="element__title">Домбай</h2>
                             <div class="element__like"></div>
                         </div>
                     </li>
-                    <li class="element">
+                    <li class="cards__item element">
                         <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаево-Черкессия"
                             class="element__image">
                         <div class="element__info">
@@ -84,10 +84,11 @@
         </footer>
         <div class="popup">
             <div class="popup__container">
-                <button aria-label="Close" class="popup__close-button">Х</button>
+                <button aria-label="Закрыть" class="popup__close-button">Х</button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__profile-form">
-                    <input type="text" placeholder="Имя" name="name" autocomplete="off" class="popup__text popup__text_type_name">
+                    <input type="text" placeholder="Имя" name="name" autocomplete="off"
+                        class="popup__text popup__text_type_name">
                     <input type="text" placeholder="Описаине" name="job" autocomplete="off"
                         class="popup__text popup__text_type_description">
                     <button type="submit" class="popup__submit-button">Сохранить</button>
