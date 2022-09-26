@@ -2,6 +2,7 @@
     background-image: url(../../images/plus.svg);
     align-self: center;
     background-size: 22px;
+    padding: 0;
     background-repeat: no-repeat;
     background-position: center;
     width: 150px;
@@ -11,6 +12,7 @@
     border-radius: 2%;
     transition: 0.2s;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .add-button:hover {
