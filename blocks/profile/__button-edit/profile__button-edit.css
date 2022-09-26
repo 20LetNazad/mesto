@@ -1,4 +1,4 @@
-.profife__edit-button {
+.profife__button-edit {
     background-image: url(../../../images/edit-button.svg);
     width: 24px;
     height: 24px;
@@ -6,19 +6,19 @@
     transition: opacity 0.2s;
 }
 
-.profife__edit-button:hover {
+.profife__button-edit:hover {
     opacity: 0.7;
 }
 
 @media screen and (max-width: 1023px) {
-    .profife__edit-button {
+    .profife__button-edit {
         margin-top: 8px;
         margin-left: 15px;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .profife__edit-button {
+    .profife__button-edit {
         margin-top: 8px;
         margin-left: 0;
         width: 18px;

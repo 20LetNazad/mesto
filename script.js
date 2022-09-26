@@ -4,9 +4,9 @@ let popupOpen = document.querySelector('.popup_opened');
 let profile = document.querySelector('.profile');
 let formElement = document.querySelector('.popup__form');
 let closeButton = popup.querySelector('.popup__close-button');
-let editButton = profile.querySelector('.profife__edit-button');
-let nameInput = formElement.querySelector('.input__text_type_name');
-let jobInput = formElement.querySelector('.input__text_type_description');
+let editButton = profile.querySelector('.profife__button-edit');
+let nameInput = formElement.querySelector('.popup__text_type_name');
+let jobInput = formElement.querySelector('.popup__text_type_description');
 
 function closePopup() {
     popup.classList.remove('popup_opened');

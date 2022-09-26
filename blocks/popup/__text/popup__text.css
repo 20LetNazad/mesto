@@ -1,4 +1,4 @@
-.input__text {
+.popup__text {
     width: 358px;
     height: 27px;
     margin: 0 auto 30px auto;
@@ -12,7 +12,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .input__text {
+    .popup__text{
         width: 238px;
         height: 27px;
     }
