@@ -3,6 +3,7 @@
     height: 27px;
     margin: 0 auto 30px auto;
     padding: 0;
+    outline: none;
     border: 1px solid transparent;
     border-bottom-color: #000;
     font-weight: 400;
