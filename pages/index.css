@@ -34,8 +34,9 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__profile-form/popup__profile-form.css);
 @import url(../blocks/popup/__text/popup__text.css);
-@import url(../blocks/popup/_card/popup_card.css);
+@import url(../blocks/popup-add-card/popup-add-card.css);
 
 /* Modifiers */
 
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup-add-card/_open/popup-add-card_open.css);
