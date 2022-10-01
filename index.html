@@ -89,7 +89,8 @@
             <form class="popup__profile-form">
                 <input autocomplete="off" class="popup__text popup__text_type_name" name="name" placeholder="Имя"
                        type="text">
-                <input autocomplete="off" class="popup__text popup__text_type_description" name="job" placeholder="Описаине"
+                <input autocomplete="off" class="popup__text popup__text_type_description" name="job"
+                       placeholder="Описаине"
                        type="text">
                 <button class="popup__submit-button" type="submit">Сохранить</button>
             </form>
@@ -100,14 +101,25 @@
             <button aria-label="Закрыть" class="popup__close-button">Х</button>
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__profile-form">
-                <input autocomplete="off" class="popup__text popup__text_type_image-name" name="name" placeholder="Название"
+                <input autocomplete="off" class="popup__text popup__text_type_image-name" name="name"
+                       placeholder="Название"
                        type="text">
-                <input autocomplete="off" class="popup__text popup__text_type_link" name="job" placeholder="Ссылка на картинку"
+                <input autocomplete="off" class="popup__text popup__text_type_link" name="job"
+                       placeholder="Ссылка на картинку"
                        type="text">
                 <button class="popup__submit-button" type="submit">Создать</button>
             </form>
         </div>
     </div>
+    <template id="card">
+        <li class="cards__item element">
+            <img alt="Домбай" class="element__image" src="">
+            <div class="element__info">
+                <h2 class="element__title"></h2>
+                <button aria-label="Поставить лайк" class="element__like"></button>
+            </div>
+        </li>
+    </template>
 </div>
 <script src="script.js"></script>
 </body>
