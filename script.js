@@ -66,8 +66,7 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 const render = () => {
     initialCards.forEach(card => {
-        const createCard = addCard(card.name, card.link);
-        container.append(createCard);
+        container.append(addCard(card.name, card.link));
     });
 }
 
