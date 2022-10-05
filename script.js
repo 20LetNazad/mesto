@@ -10,16 +10,38 @@ const nameInput = formElement.querySelector('.popup__text_type_name');
 const jobInput = formElement.querySelector('.popup__text_type_description');
 const name = profile.querySelector('.profile__nickmane');
 const description = profile.querySelector('.profile__description');
+const container = document.querySelector('.elements');
+const template = document.querySelector('.template');
 
-closeButton.addEventListener('click', function (){
+const initialCards = [{
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+}, {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+}, {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+}, {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+}, {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+}, {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+}];
+
+closeButton.addEventListener('click', function () {
     popup.classList.remove('popup_opened');
 });
 
-closeButtonCard.addEventListener('click', function (){
+closeButtonCard.addEventListener('click', function () {
     popupCard.classList.remove('popup-add-card_open');
 });
 
-editButton.addEventListener('click', function (){
+editButton.addEventListener('click', function () {
     let userNameValue = name.textContent;
     let descriptionValue = description.textContent;
     nameInput.value = userNameValue;
@@ -27,15 +49,33 @@ editButton.addEventListener('click', function (){
     popup.classList.add('popup_opened');
 });
 
-addButton.addEventListener('click', function (){
+addButton.addEventListener('click', function () {
     popupCard.classList.add('popup-add-card_open');
 });
 
-formElement.addEventListener('submit', function(evt) {
+function formSubmitHandler(evt) {
     evt.preventDefault();
     let nameValue = nameInput.value;
     let jobValue = jobInput.value;
     name.textContent = nameValue;
     description.textContent = jobValue;
     popup.classList.remove('popup_opened');
-});
+}
+
+formElement.addEventListener('submit', formSubmitHandler);
+
+const render = () => {
+    initialCards.forEach(card => {
+        const createCard = addCard(card.name, card.link);
+        container.append(createCard);
+    });
+}
+
+const addCard = (name, link) => {
+    const createCard = template.content.cloneNode(true);
+    createCard.querySelector('.element__title').textContent = name;
+    createCard.querySelector('.element__image').src = link;
+    return createCard;
+}
+
+render()
