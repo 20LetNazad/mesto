@@ -72,12 +72,12 @@ const render = () => {
         container.append(currentItem);
     });
 
-    submitBtm.addEventListener("click", handleAddCard);
+    submitBtm.addEventListener('click', handleAddCard);
 };
 
 const createCardNode = (name, link) => {
     const currentItem = template.content.cloneNode(true);
-    const currentText = currentItem.querySelector(".element__title");
+    const currentText = currentItem.querySelector('.element__title');
     const currentImg = currentItem.querySelector('.element__image');
     currentText.textContent = name;
     currentImg.src = link;
@@ -88,8 +88,22 @@ const createCardNode = (name, link) => {
         openImgPopup();
     });
 
+    setListeners(currentItem);
+
     return currentItem;
+
 };
+
+const setListeners = (currentItem) => {
+    const setLike = currentItem.querySelector('.element__like');
+    setLike.addEventListener('click', likeCard);
+
+
+};
+
+const likeCard = (evt) => {
+    evt.target.classList.toggle('element__like_active');
+}
 
 const handleAddCard = (evt) => {
     evt.preventDefault();
