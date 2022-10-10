@@ -85,6 +85,7 @@ const createCardNode = (name, link) => {
 
     currentImg.addEventListener('click', function (){
         imgCaption.textContent = name;
+        imgLink.alt = name;
         imgLink.src = link;
         openImgPopup();
     });
