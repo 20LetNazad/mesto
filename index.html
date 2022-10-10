@@ -35,11 +35,11 @@
         <footer class="footer">
             <p class="footer__copyright">© 2022 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup profile-popup">
             <div class="popup__container">
                 <button aria-label="Закрыть" class="popup__close-button">Х</button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__profile-form">
+                <form class="popup__profile-form" id="edit-profile">
                     <input autocomplete="off" class="popup__text popup__text_type_name" name="name" placeholder="Имя"
                         type="text">
                     <input autocomplete="off" class="popup__text popup__text_type_description" name="job"
@@ -48,11 +48,11 @@
                 </form>
             </div>
         </div>
-        <div class="popup popup_add-card">
-            <div class="popup__container popup__container_card">
+        <div class="popup card-popup">
+            <div class="popup__container card-popup">
                 <button aria-label="Закрыть" class="popup__close-button">Х</button>
                 <h2 class="popup__title">Новое место</h2>
-                <form class="popup__profile-form popup__profile-form_card">
+                <form class="popup__profile-form" id="add-place">
                     <input autocomplete="off" class="popup__text popup__text_type_image-name" name="name"
                         placeholder="Название" type="text">
                     <input autocomplete="off" class="popup__text popup__text_type_link" name="job"
@@ -61,9 +61,9 @@
                 </form>
             </div>
         </div>
-        <div class="image-popup">
+        <div class="popup image-popup">
             <figure class="image-popup__block">
-                <button aria-label="Закрыть" class="image-popup__close-button">Х</button>
+                <button aria-label="Закрыть" class="popup__close-button">Х</button>
                 <img class="image-popup__img">
                 <figcaption class="image-popup__caption"></figcaption>
             </figure>
