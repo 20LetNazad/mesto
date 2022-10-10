@@ -10,79 +10,76 @@
 </head>
 
 <body>
-<div class="page">
-    <header class="header">
-        <div class="logo"></div>
-    </header>
-    <main>
-        <section class="profile">
-            <div class="profile__content">
-                <div class="profile__avatar"></div>
-                <div class="profile__info">
-                    <div class="profile__edit">
-                        <h1 class="profile__nickmane">Жак-Ив Кусто</h1>
-                        <button aria-label="Редактировать профиль" class="profile__edit-button"></button>
+    <div class="page">
+        <header class="header">
+            <div class="logo"></div>
+        </header>
+        <main>
+            <section class="profile">
+                <div class="profile__content">
+                    <div class="profile__avatar"></div>
+                    <div class="profile__info">
+                        <div class="profile__edit">
+                            <h1 class="profile__nickmane">Жак-Ив Кусто</h1>
+                            <button aria-label="Редактировать профиль" class="profile__edit-button"></button>
+                        </div>
+                        <p class="profile__description">Исследователь океана</p>
                     </div>
-                    <p class="profile__description">Исследователь океана</p>
                 </div>
+                <button aria-label="Добавить изображение" class="add-button"></button>
+            </section>
+            <section class="cards">
+                <ul class="elements"></ul>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">© 2022 Mesto Russia</p>
+        </footer>
+        <div class="popup">
+            <div class="popup__container">
+                <button aria-label="Закрыть" class="popup__close-button">Х</button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__profile-form">
+                    <input autocomplete="off" class="popup__text popup__text_type_name" name="name" placeholder="Имя"
+                        type="text">
+                    <input autocomplete="off" class="popup__text popup__text_type_description" name="job"
+                        placeholder="Описаине" type="text">
+                    <button class="popup__submit-button" type="submit">Сохранить</button>
+                </form>
             </div>
-            <button aria-label="Добавить изображение" class="add-button"></button>
-        </section>
-       <section class="cards">
-           <ul class="elements"></ul>
-        </section>
-    </main>
-    <footer class="footer">
-        <p class="footer__copyright">© 2022 Mesto Russia</p>
-    </footer>
-    <div class="popup">
-        <div class="popup__container">
-            <button aria-label="Закрыть" class="popup__close-button">Х</button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__profile-form">
-                <input autocomplete="off" class="popup__text popup__text_type_name" name="name" placeholder="Имя"
-                       type="text">
-                <input autocomplete="off" class="popup__text popup__text_type_description" name="job"
-                       placeholder="Описаине"
-                       type="text">
-                <button class="popup__submit-button" type="submit">Сохранить</button>
-            </form>
         </div>
-    </div>
-    <div class="popup popup_add-card">
-        <div class="popup__container popup__container_card">
-            <button aria-label="Закрыть" class="popup__close-button">Х</button>
-            <h2 class="popup__title">Новое место</h2>
-            <form class="popup__profile-form popup__profile-form_card">
-                <input autocomplete="off" class="popup__text popup__text_type_image-name" name="name"
-                       placeholder="Название"
-                       type="text">
-                <input autocomplete="off" class="popup__text popup__text_type_link" name="job"
-                       placeholder="Ссылка на картинку"
-                       type="text">
-                <button class="popup__submit-button" type="submit">Создать</button>
-            </form>
-        </div>
-    </div>
-    <div class="image-popup">
-        <figure class="image-popup__block">
-            <button aria-label="Закрыть" class="image-popup__close-button">Х</button>
-            <img class="image-popup__img">
-            <figcaption class="image-popup__caption"></figcaption>
-        </figure>
-    </div>
-    <template class="template">
-        <li class="cards__item element">
-            <button aria-label="Удалить карточку" class="element__delete"></button>
-            <img class="element__image">
-            <div class="element__info">
-                <h2 class="element__title"></h2>
-                <button aria-label="Поставить лайк" class="element__like"></button>
+        <div class="popup popup_add-card">
+            <div class="popup__container popup__container_card">
+                <button aria-label="Закрыть" class="popup__close-button">Х</button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__profile-form popup__profile-form_card">
+                    <input autocomplete="off" class="popup__text popup__text_type_image-name" name="name"
+                        placeholder="Название" type="text">
+                    <input autocomplete="off" class="popup__text popup__text_type_link" name="job"
+                        placeholder="Ссылка на картинку" type="text">
+                    <button class="popup__submit-button" type="submit">Создать</button>
+                </form>
             </div>
-        </li>
-    </template>
-</div>
-<script src="script.js"></script>
+        </div>
+        <div class="image-popup">
+            <figure class="image-popup__block">
+                <button aria-label="Закрыть" class="image-popup__close-button">Х</button>
+                <img class="image-popup__img">
+                <figcaption class="image-popup__caption"></figcaption>
+            </figure>
+        </div>
+        <template class="template">
+            <li class="cards__item element">
+                <button aria-label="Удалить карточку" class="element__delete"></button>
+                <img class="element__image">
+                <div class="element__info">
+                    <h2 class="element__title"></h2>
+                    <button aria-label="Поставить лайк" class="element__like"></button>
+                </div>
+            </li>
+        </template>
+    </div>
+    <script src="scripts/script.js"></script>
 </body>
 
 </html>
