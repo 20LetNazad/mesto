@@ -80,6 +80,7 @@ const createCardNode = (name, link) => {
     const currentText = currentItem.querySelector('.element__title');
     const currentImg = currentItem.querySelector('.element__image');
     currentText.textContent = name;
+    currentImg.alt = name;
     currentImg.src = link;
 
     currentImg.addEventListener('click', function (){
@@ -98,11 +99,17 @@ const setListeners = (currentItem) => {
     const setLike = currentItem.querySelector('.element__like');
     setLike.addEventListener('click', likeCard);
 
-
+    const removeCard = currentItem.querySelector(".element__delete");
+    removeCard.addEventListener("click", delCard);
 };
 
 const likeCard = (evt) => {
     evt.target.classList.toggle('element__like_active');
+}
+
+const delCard = (evt) => {
+    const currentItem = evt.target.closest('.element');
+    currentItem.remove();
 }
 
 const handleAddCard = (evt) => {

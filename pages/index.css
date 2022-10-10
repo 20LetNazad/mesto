@@ -39,6 +39,7 @@
 @import url(../blocks/image-popup/__block/image-popup__block.css);
 @import url(../blocks/image-popup/__caption/image-popup__caption.css);
 @import url(../blocks/image-popup/__img/image-popup__img.css);
+@import url(../blocks/element/__delete/element__delete.css);
 
 /* Modifiers */
 
