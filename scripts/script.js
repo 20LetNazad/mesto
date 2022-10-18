@@ -139,3 +139,21 @@ const handleAddCard = (evt) => {
 render();
 
 addButton.addEventListener("click", () => openPopup(popupCard));
+
+profilePopup.addEventListener("click", function (evt) {
+  if (evt.target == evt.currentTarget) {
+    closePopup(profilePopup);
+  }
+});
+
+cardPopup.addEventListener("click", function (evt) {
+  if (evt.target == evt.currentTarget) {
+    closePopup(cardPopup);
+  }
+});
+
+imagePopup.addEventListener("click", function (evt) {
+  if (evt.target == evt.currentTarget) {
+    closePopup(imagePopup);
+  }
+});
