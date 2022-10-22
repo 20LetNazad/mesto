@@ -49,8 +49,17 @@ const initialCards = [
   },
 ];
 
+const closeWithEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(profilePopup);
+    closePopup(cardPopup);
+    closePopup(imagePopup);
+  }
+};
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeWithEsc);
 }
 
 function closePopup(popup) {
