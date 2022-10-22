@@ -13,5 +13,5 @@
     line-height: 22px;
     text-align: center;
     transition: 0.2s;
-    cursor: pointer;
+    cursor: default;
 }
