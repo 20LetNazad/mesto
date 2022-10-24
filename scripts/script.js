@@ -1,6 +1,8 @@
+const popupOpened = document.querySelector('.popup_opened');
 const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup');
 const imagePopup = document.querySelector('.image-popup');
+const submitCardButton = cardPopup.querySelector('.popup__submit-button');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 const profile = document.querySelector('.profile');
 const profileForm = document.forms['edit-profile'];
@@ -145,6 +147,8 @@ const handleAddCard = (evt) => {
   container.prepend(name);
   formCard.reset();
   closePopup(cardPopup);
+  submitCardButton.setAttribute('disabled', true);
+  submitCardButton.classList.add('popup__submit-button_disabled');
 };
 
 render();
