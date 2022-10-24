@@ -1,17 +1,12 @@
 .popup__submit-button_disabled {
-    width: 358px;
-    height: 50px;
     background-color: transparent;
-    color: #000;
+    color: #ccc;
     border-radius: 2px;
-    border: 1px solid #000;
-    margin-top: 18px;
-    margin-bottom: 37px;
-    padding: 0;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    transition: 0.2s;
+    border: 1px solid #ccc;
     cursor: default;
+    transition: none;
+}
+
+.popup__submit-button_disabled:hover {
+    opacity: 1;
 }
