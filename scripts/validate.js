@@ -4,16 +4,18 @@ const settings = {
   submitButtonSelector: '.popup__submit-button',
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input-error',
-  errorClass: 'popup__error_visible',
+  errorClass: 'popup__input_error',
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove('popup__input_error');
   errorElement.textContent = '';
 };
 
 const showInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add('popup__input_error');
   errorElement.textContent = inputElement.validationMessage;
 };
 
