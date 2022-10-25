@@ -1,4 +1,3 @@
-const popupOpened = document.querySelector('.popup_opened');
 const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup');
 const imagePopup = document.querySelector('.image-popup');
@@ -97,7 +96,6 @@ const render = () => {
   initialCards.forEach((item) => {
     const currentItem = createCardNode(item.name, item.link);
     container.append(currentItem);
-    formCard.addEventListener('submit', handleAddCard);
   });
 };
 
@@ -152,5 +150,5 @@ const handleAddCard = (evt) => {
 };
 
 render();
-
+formCard.addEventListener('submit', handleAddCard);
 addButton.addEventListener('click', () => openPopup(cardPopup));
