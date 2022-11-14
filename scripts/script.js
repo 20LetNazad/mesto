@@ -25,7 +25,10 @@ const container = document.querySelector('.elements');
 const name = profile.querySelector('.profile__nickmane');
 
 // Кнопки
-const submitCardButton = cardPopup.querySelector('.popup__submit-button');
+const submitButtonCard = cardPopup.querySelector('.popup__submit-button');
+const submitButtonProfile = profilePopup.querySelector(
+  '.popup__submit-button_profile'
+);
 const editButton = profile.querySelector('.profile__edit-button');
 const addButton = profile.querySelector('.add-button');
 
@@ -41,8 +44,16 @@ const inputCardNamePopup = cardPopup.querySelector(
 const inputCardImgPopup = cardPopup.querySelector('.popup__input_type_link');
 
 // Валидация форм
-const editProfileValidation = new FormValidator(settings, formEditProfile);
-const addCardValidation = new FormValidator(settings, formCard);
+const editProfileValidation = new FormValidator(
+  settings,
+  formEditProfile,
+  submitButtonProfile
+);
+const addCardValidation = new FormValidator(
+  settings,
+  formCard,
+  submitButtonCard
+);
 
 // Массив с карточками
 const initialCards = [
@@ -142,8 +153,8 @@ const handleAddCard = (evt) => {
   container.prepend(card.generateCard());
   closePopup(cardPopup);
   formCard.reset();
-  submitCardButton.setAttribute('disabled', true);
-  submitCardButton.classList.add('popup__submit-button_disabled');
+  submitButtonCard.setAttribute('disabled', true);
+  submitButtonCard.classList.add('popup__submit-button_disabled');
 };
 
 // Вызов валидации форм
