@@ -84,7 +84,7 @@ const initialCards = [
 ];
 
 // Закрытие попапа через Escape
-const closeWithEsc = (evt) => {
+export const closeWithEsc = (evt) => {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   }
@@ -109,7 +109,7 @@ function closePopup(popup) {
 }
 
 // Функция открытия попапа
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeWithEsc);
 }
