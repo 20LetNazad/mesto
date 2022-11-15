@@ -1,4 +1,4 @@
-import openImagePopup from './utils.js';
+import {openImagePopup} from './utils.js';
 
 // Создание карточки через форму
 export default class Card {

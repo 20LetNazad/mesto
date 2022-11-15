@@ -1,8 +1,9 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import { initialCards } from './utils.js';
 
 // Конфиг для валидации
-const settings = {
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',
@@ -11,7 +12,11 @@ const settings = {
   errorClass: 'popup__input_error',
 };
 
+/* Массив с карточками для изменения */
+const cardData = { initialCards };
+
 // Попапы
+const popup = document.querySelectorAll('.popup');
 const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup');
 
@@ -21,12 +26,12 @@ const formEditProfile = document.forms['edit-profile'];
 
 // Селекторы класов
 const profile = document.querySelector('.profile');
-const container = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.elements');
 const name = profile.querySelector('.profile__nickmane');
 
 // Кнопки
-const submitButtonCard = cardPopup.querySelector('.popup__submit-button');
-const submitButtonProfile = profilePopup.querySelector(
+const cardButtonSubmit = cardPopup.querySelector('.popup__submit-button');
+const profileButtonSubmit = profilePopup.querySelector(
   '.popup__submit-button_profile'
 );
 const editButton = profile.querySelector('.profile__edit-button');
@@ -44,44 +49,16 @@ const inputCardNamePopup = cardPopup.querySelector(
 const inputCardImgPopup = cardPopup.querySelector('.popup__input_type_link');
 
 // Валидация форм
-const editProfileValidation = new FormValidator(
-  settings,
+const profileFormValidator = new FormValidator(
+  validationConfig,
   formEditProfile,
-  submitButtonProfile
+  profileButtonSubmit
 );
-const addCardValidation = new FormValidator(
-  settings,
+const cardFormValidator = new FormValidator(
+  validationConfig,
   formCard,
-  submitButtonCard
+  cardButtonSubmit
 );
-
-// Массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
 
 // Закрытие попапа через Escape
 export const closeWithEsc = (evt) => {
@@ -91,7 +68,7 @@ export const closeWithEsc = (evt) => {
 };
 
 // Закрытие попапа через крестик и оверлей
-document.querySelectorAll('.popup').forEach((popup) => {
+popup.forEach((popup) => {
   popup.addEventListener('mousedown', (evt) => {
     if (
       evt.target === evt.currentTarget ||
@@ -123,9 +100,6 @@ editButton.addEventListener('click', function () {
   openPopup(profilePopup);
 });
 
-// Открытие попапа добавления карточки
-addButton.addEventListener('click', () => openPopup(cardPopup));
-
 // Сабмит изменения в попапе редвктирования профиля
 formEditProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
@@ -137,29 +111,34 @@ formEditProfile.addEventListener('submit', function (evt) {
 });
 
 // Рендер массива карточек
-initialCards.forEach((item) => {
-  const card = new Card(item, '.template');
-  const cardElement = card.generateCard();
-
-  document.querySelector('.elements').append(cardElement);
-});
+const render = () => {
+  initialCards.forEach((item) => {
+    const card = new Card(item, '.template');
+    const cardElement = card.generateCard();
+    cardsContainer.append(cardElement);
+  });
+};
 
 // Добавление новой карточки через попап добавления карточки
 const handleAddCard = (evt) => {
   evt.preventDefault();
-  initialCards.name = inputCardNamePopup.value;
-  initialCards.link = inputCardImgPopup.value;
-  const card = new Card(initialCards, '.template');
-  container.prepend(card.generateCard());
+  cardData.name = inputCardNamePopup.value;
+  cardData.link = inputCardImgPopup.value;
+  const card = new Card(cardData, '.template');
+  cardsContainer.prepend(card.generateCard());
   closePopup(cardPopup);
   formCard.reset();
-  submitButtonCard.setAttribute('disabled', true);
-  submitButtonCard.classList.add('popup__submit-button_disabled');
+  cardFormValidator._disableButton();
 };
 
 // Вызов валидации форм
-editProfileValidation.enableValidation();
-addCardValidation.enableValidation();
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 // Сабмит добавления карточки через попап добавления карточки
 formCard.addEventListener('submit', handleAddCard);
+
+// Открытие попапа добавления карточки
+addButton.addEventListener('click', () => openPopup(cardPopup));
+
+render();
