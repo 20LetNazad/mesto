@@ -1,9 +1,11 @@
 // Валидация форм
 export default class FormValidator {
-  constructor(settings, form, submitButton) {
+  constructor(settings, form) {
     this._settings = settings;
     this._form = form;
-    this._submitButton = submitButton;
+    this._submitButton = this._form.querySelector(
+      this._settings.submitButtonSelector
+    );
   }
 
   // Проверка на валидность
@@ -22,7 +24,7 @@ export default class FormValidator {
     errorElement.textContent = inputElement.validationMessage;
   }
 
-  // Убрать ошибку при валмдности
+  // Убрать ошибку при валидности
   _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._settings.errorClass);
@@ -37,8 +39,7 @@ export default class FormValidator {
   // Изменение состояния кнопки
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._submitButton.classList.add(this._settings.inactiveButtonClass);
-      this._submitButton.setAttribute('disabled', true);
+      this.disableButton();
     } else {
       this._submitButton.classList.remove(this._settings.inactiveButtonClass);
       this._submitButton.removeAttribute('disabled');
@@ -57,7 +58,7 @@ export default class FormValidator {
     });
   }
 
-  _disableButton() {
+  disableButton() {
     this._submitButton.classList.add(this._settings.inactiveButtonClass);
     this._submitButton.setAttribute('disabled', true);
   }
