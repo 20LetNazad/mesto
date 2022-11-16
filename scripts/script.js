@@ -55,7 +55,8 @@ const handleAddCard = (evt) => {
     name: inputCardNamePopup.value,
     link: inputCardImgPopup.value,
   };
-  createCard(cardData);
+  const card = createCard(cardData);
+  cardsContainer.prepend(card);
   closePopup(cardPopup);
   formCard.reset();
   cardFormValidator.disableButton();
@@ -81,10 +82,10 @@ export function openPopup(popup) {
 }
 
 // Создание карточки с помощью класса
-function createCard(item) {
-  const card = new Card(item, '.template');
+function createCard(cardData) {
+  const card = new Card(cardData, '.template');
   const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
+  return cardElement;
 }
 
 function editProlileSubmit() {
@@ -119,7 +120,8 @@ formEditProfile.addEventListener('submit', function (evt) {
 
 // Рендер массива карточек
 initialCards.forEach((item) => {
-  createCard(item);
+  const card = createCard(item);
+  cardsContainer.append(card);
 });
 
 // Вызов валидации форм
