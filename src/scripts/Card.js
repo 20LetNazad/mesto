@@ -1,11 +1,10 @@
-import openImagePopup from './utils.js';
-
 // Создание карточки через форму
 export default class Card {
-  constructor(cardData, templateSelector) {
+  constructor(cardData, templateSelector, { handleCardClick }) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Получение темплейта для карточек
@@ -35,7 +34,7 @@ export default class Card {
     this._element
       .querySelector('.element__image')
       .addEventListener('click', () => {
-        openImagePopup(this._link, this._name);
+        this._handleCardClick(this._link, this._name);
       });
   }
 
