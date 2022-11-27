@@ -1,5 +1,5 @@
 import './pages/index.css';
-
+import Section from './scripts/Section.js';
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import { initialCards } from './scripts/cards.js';
@@ -54,6 +54,7 @@ const profileFormValidator = new FormValidator(
   formEditProfile
 );
 const cardFormValidator = new FormValidator(validationConfig, formCard);
+
 // Добавление новой карточки через попап добавления карточки
 const handleAddCard = (evt) => {
   evt.preventDefault();
@@ -67,6 +68,17 @@ const handleAddCard = (evt) => {
   formCard.reset();
   cardFormValidator.disableButton();
 };
+
+// Рендер масива карточек
+const renderCard = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      renderCard.addItem(createCard(item));
+    },
+  },
+  '.elements'
+);
 
 // Закрытие попапа через Escape
 export const closeWithEsc = (evt) => {
@@ -128,12 +140,6 @@ formEditProfile.addEventListener('submit', function (evt) {
   closePopup(profilePopup);
 });
 
-// Рендер массива карточек
-initialCards.forEach((item) => {
-  const card = createCard(item);
-  cardsContainer.append(card);
-});
-
 // Вызов валидации форм
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
@@ -149,3 +155,5 @@ buttonOpenCardPopup.addEventListener('click', () => openPopup(cardPopup));
 
 // Установка слушателя на закрытие попапа с изображением
 openPopupImage.setEventListeners();
+
+renderCard.renderItems();
