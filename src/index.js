@@ -4,6 +4,8 @@ import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
 import { initialCards } from './scripts/cards.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
+import UserInfo from './scripts/UserInfo.js';
+import Popup from './scripts/Popup.js';
 
 // Конфиг для валидации
 const validationConfig = {
@@ -29,6 +31,7 @@ const formEditProfile = document.forms['edit-profile'];
 const profile = document.querySelector('.profile');
 const cardsContainer = document.querySelector('.elements');
 const name = profile.querySelector('.profile__nickmane');
+const description = profile.querySelector('.profile__description');
 
 // Кнопки
 const buttonOpenProfilePopup = profile.querySelector('.profile__edit-button');
@@ -39,7 +42,6 @@ const nameInput = formEditProfile.querySelector('.popup__input_type_name');
 const jobInput = formEditProfile.querySelector(
   '.popup__input_type_description'
 );
-const description = profile.querySelector('.profile__description');
 const inputCardNamePopup = cardPopup.querySelector(
   '.popup__input_type_image-name'
 );
@@ -80,12 +82,12 @@ const renderCard = new Section(
   '.elements'
 );
 
-// Закрытие попапа через Escape
-export const closeWithEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-};
+// // Закрытие попапа через Escape
+// export const closeWithEsc = (evt) => {
+//   if (evt.key === 'Escape') {
+//     closePopup(document.querySelector('.popup_opened'));
+//   }
+// };
 
 // Закрытие попапа
 // function closePopup(popup) {
@@ -110,14 +112,6 @@ function createCard(cardData) {
   return cardElement;
 }
 
-function editProlileSubmit() {
-  const userNameValue = name.textContent;
-  const descriptionValue = description.textContent;
-  nameInput.value = userNameValue;
-  jobInput.value = descriptionValue;
-  openPopup(profilePopup);
-}
-
 // // Закрытие попапа через крестик и оверлей
 // popupList.forEach((popup) => {
 //   popup.addEventListener('mousedown', (evt) => {
@@ -130,14 +124,30 @@ function editProlileSubmit() {
 //   });
 // });
 
-// Сабмит изменения в попапе редвктирования профиля
+const openProfilePopu = new Popup(profilePopup);
+
+const userInfo = new UserInfo('.profile__nickmane', '.profile__description');
+
+openProfilePopu.setEventListeners();
+
+function editProlileSubmit() {
+  const userNameValue = name;
+  const descriptionValue = description;
+  userInfo.getUserInfo();
+  // nameInput.value = userNameValue;
+  // jobInput.value = descriptionValue;
+  openProfilePopu.open();
+}
+
+// Сабмит изменения в попапе редактирования профиля
 formEditProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
-  name.textContent = nameValue;
-  description.textContent = jobValue;
-  closePopup(profilePopup);
+  userInfo.setUserInfo({ nameValue, jobValue });
+  // name.textContent = nameValue;
+  // description.textContent = jobValue;
+  openProfilePopu.close();
 });
 
 // Вызов валидации форм
