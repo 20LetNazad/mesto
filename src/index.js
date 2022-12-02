@@ -3,42 +3,22 @@ import './pages/index.css';
 import Section from './scripts/Section.js';
 import Card from './scripts/Card.js';
 import FormValidator from './scripts/FormValidator.js';
-import { initialCards } from './scripts/cards.js';
 import PopupWithImage from './scripts/PopupWithImage.js';
 import UserInfo from './scripts/UserInfo.js';
 import PopupWithForm from './scripts/PopupWithForm.js';
-
-// Конфиг для валидации
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input-error',
-  errorClass: 'popup__input_error',
-};
-
-// // Попапы
-const profilePopup = document.querySelector('.profile-popup');
-const cardPopup = document.querySelector('.card-popup');
-const imagePopup = document.querySelector('.image-popup');
-
-// // Формы
-const formCard = document.forms['add-place'];
-const formEditProfile = document.forms['edit-profile'];
-
-// // Селекторы класов
-const profile = document.querySelector('.profile');
-
-// // Кнопки
-const buttonOpenProfilePopup = profile.querySelector('.profile__edit-button');
-const buttonOpenCardPopup = profile.querySelector('.add-button');
-
-// // Инпуты
-const nameInput = formEditProfile.querySelector('.popup__input_type_name');
-const jobInput = formEditProfile.querySelector(
-  '.popup__input_type_description'
-);
+import { initialCards } from './utils/cards.js';
+import {
+  validationConfig,
+  profilePopup,
+  cardPopup,
+  imagePopup,
+  formCard,
+  formEditProfile,
+  buttonOpenCardPopup,
+  buttonOpenProfilePopup,
+  nameInput,
+  jobInput,
+} from './utils/constants';
 
 // Открытие попапа с изображением
 const openPopupImage = new PopupWithImage(imagePopup);
@@ -91,7 +71,8 @@ function createCard(cardData) {
   return cardElement;
 }
 
-function editProlileSubmit() {
+// Функция открытия попапа профиля
+function openProlilePopup() {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.job;
@@ -99,7 +80,8 @@ function editProlileSubmit() {
   popupWithProfile.open();
 }
 
-function handleClickAddButton() {
+// Функция открытия попапа карточек
+function openCardPopup() {
   popupWithCard.open();
   cardFormValidator.disableButton();
 }
@@ -109,8 +91,8 @@ profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
 // Открытие попапов
-buttonOpenProfilePopup.addEventListener('click', editProlileSubmit);
-buttonOpenCardPopup.addEventListener('click', handleClickAddButton);
+buttonOpenProfilePopup.addEventListener('click', openProlilePopup);
+buttonOpenCardPopup.addEventListener('click', openCardPopup);
 
 // Установка слушателей
 openPopupImage.setEventListeners();
