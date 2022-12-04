@@ -76,14 +76,14 @@ function openProlilePopup() {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.job;
-  profileFormValidator.disableButton();
+  profileFormValidator.resetValidation();
   popupWithProfile.open();
 }
 
 // Функция открытия попапа карточек
 function openCardPopup() {
   popupWithCard.open();
-  cardFormValidator.disableButton();
+  cardFormValidator.resetValidation();
 }
 
 // Вызов валидации форм
