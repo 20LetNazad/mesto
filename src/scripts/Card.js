@@ -19,47 +19,43 @@ export default class Card {
 
   // Установка слушателей
   _setEventListeners() {
-    this._element
-      .querySelector('.element__like')
-      .addEventListener('click', () => {
-        this._handleLikeClick();
-      });
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeClick();
+    });
 
-    this._element
+    this._cardElement
       .querySelector('.element__delete')
       .addEventListener('click', () => {
-        this._handleDelete(this._element);
+        this._handleDelete(this._cardElement);
       });
 
-    this._element
-      .querySelector('.element__image')
-      .addEventListener('click', () => {
-        this._handleCardClick(this._link, this._name);
-      });
+    this._templateImage.addEventListener('click', () => {
+      this._handleCardClick(this._link, this._name);
+    });
   }
 
   // Лайк карточек
   _handleLikeClick() {
-    this._element
-      .querySelector('.element__like')
-      .classList.toggle('element__like_active');
+    this._likeButton.classList.toggle('element__like_active');
   }
 
   // Удаление карточек
   _handleDelete() {
-    this._element.remove();
-    this._element = null;
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   // Создание карточки
   generateCard() {
-    this._element = this._getTemplateElement();
+    this._cardElement = this._getTemplateElement();
+    this._likeButton = this._cardElement.querySelector('.element__like');
+    this._templateImage = this._cardElement.querySelector('.element__image');
+    this._templateTitle = this._cardElement.querySelector('.element__title');
+    this._templateTitle.textContent = this._name;
+    this._templateImage.src = this._link;
+    this._templateImage.alt = this._name;
     this._setEventListeners();
-    const templateImage = this._element.querySelector('.element__image');
-    this._element.querySelector('.element__title').textContent = this._name;
-    templateImage.src = this._link;
-    templateImage.alt = this._name;
 
-    return this._element;
+    return this._cardElement;
   }
 }
