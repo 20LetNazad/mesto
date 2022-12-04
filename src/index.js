@@ -16,8 +16,6 @@ import {
   formEditProfile,
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
-  nameInput,
-  jobInput,
 } from './utils/constants';
 
 // Открытие попапа с изображением
@@ -74,8 +72,7 @@ function createCard(cardData) {
 // Функция открытия попапа профиля
 function openProlilePopup() {
   const userData = userInfo.getUserInfo();
-  nameInput.value = userData.name;
-  jobInput.value = userData.job;
+  popupWithProfile.setInputValues(userData);
   profileFormValidator.resetValidation();
   popupWithProfile.open();
 }
