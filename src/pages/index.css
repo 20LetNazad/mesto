@@ -39,6 +39,7 @@
 @import url(../blocks/image-popup/__img/image-popup__img.css);
 @import url(../blocks/element/__delete/element__delete.css);
 @import url(../blocks/image-popup/image-popup.css);
+@import url(../blocks/delete-card-popup/__container/delete-card-popup__container.css);
 
 /* Modifiers */
 
@@ -46,4 +47,6 @@
 @import url(../blocks/element/__like/_active/element__like_active.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
+@import url(../blocks/popup/__submit-button/_delete-card/popup__submit-button_delete-card.css);
+@import url(../blocks/popup/__title/_delete-card/popup__title_delete-card.css);
 @import url(../blocks/popup/__input/_error/popup__input_error.css);
