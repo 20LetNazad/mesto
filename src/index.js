@@ -1,21 +1,25 @@
 import './pages/index.css';
 
-import Section from './scripts/Section.js';
-import Card from './scripts/Card.js';
-import FormValidator from './scripts/FormValidator.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
-import UserInfo from './scripts/UserInfo.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
+import Section from './components/Section.js';
+import Card from './components/Card.js';
+import FormValidator from './components/FormValidator.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import UserInfo from './components/UserInfo.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import Api from './components/Api.js';
 import { initialCards } from './utils/cards.js';
 import {
   validationConfig,
   profilePopup,
   cardPopup,
   imagePopup,
+  avatarPopup,
   formCard,
   formEditProfile,
+  formAvatar,
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
+  buttonOpenAvatar,
 } from './utils/constants';
 
 // Открытие попапа с изображением
@@ -27,9 +31,14 @@ const profileFormValidator = new FormValidator(
   formEditProfile
 );
 const cardFormValidator = new FormValidator(validationConfig, formCard);
+const avatarFormValidator = new FormValidator(validationConfig, formAvatar);
 
 // Информация о юзере
-const userInfo = new UserInfo('.profile__nickmane', '.profile__description');
+const userInfo = new UserInfo(
+  '.profile__nickmane',
+  '.profile__description',
+  '.profile__avatar'
+);
 
 // Попап карточек
 const popupWithCard = new PopupWithForm(cardPopup, {
@@ -44,6 +53,14 @@ const popupWithProfile = new PopupWithForm(profilePopup, {
   formSubmit: (data) => {
     userInfo.setUserInfo(data);
     popupWithProfile.close();
+  },
+});
+
+// Попап аватарки
+const popupWithAvatar = new PopupWithForm(avatarPopup, {
+  formSubmit: (data) => {
+    userInfo.setUserAvatar(data);
+    popupWithAvatar.close();
   },
 });
 
@@ -83,16 +100,25 @@ function openCardPopup() {
   cardFormValidator.resetValidation();
 }
 
+// Функция открытия попапа аватарки
+function openAvatarEdit() {
+  popupWithAvatar.open();
+  avatarFormValidator.resetValidation();
+}
+
 // Вызов валидации форм
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 // Открытие попапов
 buttonOpenProfilePopup.addEventListener('click', openProlilePopup);
 buttonOpenCardPopup.addEventListener('click', openCardPopup);
+buttonOpenAvatar.addEventListener('click', openAvatarEdit);
 
 // Установка слушателей
 openPopupImage.setEventListeners();
 popupWithCard.setEventListeners();
 popupWithProfile.setEventListeners();
+popupWithAvatar.setEventListeners();
 renderCard.renderItems();
