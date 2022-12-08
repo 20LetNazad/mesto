@@ -31,6 +31,12 @@ const formAvatar = document.forms['avatar'];
 // Селекторы класов
 const profile = document.querySelector('.profile');
 
+// Инпуты
+const nameInput = formEditProfile.querySelector('.popup__input_type_name');
+const jobInput = formEditProfile.querySelector(
+  '.popup__input_type_description'
+);
+
 // Кнопки
 const buttonOpenProfilePopup = profile.querySelector('.profile__edit-button');
 const buttonOpenCardPopup = profile.querySelector('.add-button');
@@ -49,4 +55,6 @@ export {
   buttonOpenProfilePopup,
   buttonOpenAvatar,
   apiConfig,
+  nameInput,
+  jobInput,
 };

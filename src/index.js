@@ -7,7 +7,6 @@ import PopupWithImage from './components/PopupWithImage.js';
 import UserInfo from './components/UserInfo.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import Api from './components/Api.js';
-import { initialCards } from './utils/cards.js';
 import {
   validationConfig,
   profilePopup,
@@ -21,6 +20,8 @@ import {
   buttonOpenProfilePopup,
   buttonOpenAvatar,
   apiConfig,
+  nameInput,
+  jobInput,
 } from './utils/constants';
 
 // API
@@ -52,44 +53,48 @@ const popupWithCard = new PopupWithForm(cardPopup, {
   },
 });
 
-// Попап профиля
+// Попап изменения имени и описания профиля на сервере
 const popupWithProfile = new PopupWithForm(profilePopup, {
-  formSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    popupWithProfile.close();
+  formSubmit: () => {
+    const inputValues = popupWithProfile.getInputValues();
+    api.editProfile(inputValues).then((data) => {
+      userInfo.setUserInfo(data);
+      popupWithProfile.close();
+    });
   },
 });
 
-// Попап аватарки
+// Попап изменения аватарки на сервере
 const popupWithAvatar = new PopupWithForm(avatarPopup, {
-  formSubmit: (data) => {
-    userInfo.setUserAvatar(data);
-    popupWithAvatar.close();
+  formSubmit: () => {
+    const inputValues = popupWithAvatar.getInputValues();
+    api.editAvatar(inputValues).then((data) => {
+      userInfo.setUserAvatar(data);
+      popupWithAvatar.close();
+    });
   },
 });
 
-api.renderCards().then((res) => {
-  const renderCard = new Section(
-    {
-      items: res,
-      renderer: (cardData) => {
-        const card = new Card(cardData, '.template', {
-          handleCardClick: () => {
-            openPopupImage.open(cardData.link, cardData.name);
-          },
-        });
-        renderCard.addItem(card.generateCard());
-      },
+// Рендер карточек с сервера
+const renderCards = new Section(
+  {
+    renderer: (item) => {
+      const card = new Card(item, '.template', {
+        handleCardClick: () => {
+          openPopupImage.open(item.name, item.link);
+        },
+      });
+      renderCards.addItem(card.generateCard());
     },
-    '.elements'
-  );
-  renderCard.renderItems();
-});
+  },
+  '.elements'
+);
 
 // Функция открытия попапа профиля
 function openProlilePopup() {
   const userData = userInfo.getUserInfo();
-  popupWithProfile.setInputValues(userData);
+  nameInput.value = userData.name;
+  jobInput.value = userData.about;
   profileFormValidator.resetValidation();
   popupWithProfile.open();
 }
@@ -105,6 +110,17 @@ function openAvatarEdit() {
   popupWithAvatar.open();
   avatarFormValidator.resetValidation();
 }
+
+// Загрузка информации о юзере с сервера
+api.userInfo().then((res) => {
+  userInfo.setUserInfo(res);
+  userInfo.setUserAvatar(res);
+});
+
+// Загрузка информации о карточках с сервера
+api.renderCards().then((res) => {
+  renderCards.renderItems(res);
+});
 
 // Вызов валидации форм
 profileFormValidator.enableValidation();
