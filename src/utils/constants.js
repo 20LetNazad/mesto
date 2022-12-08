@@ -1,3 +1,12 @@
+// Конфиг API
+const apiConfig = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-55',
+  headers: {
+    authorization: '96508db4-2bdb-409e-a863-4987f404d514',
+    'Content-Type': 'application/json',
+  },
+};
+
 // Конфиг для валидации
 const validationConfig = {
   formSelector: '.popup__form',
@@ -39,4 +48,5 @@ export {
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
   buttonOpenAvatar,
+  apiConfig,
 };

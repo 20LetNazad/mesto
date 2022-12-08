@@ -20,7 +20,11 @@ import {
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
   buttonOpenAvatar,
+  apiConfig,
 } from './utils/constants';
+
+// API
+const api = new Api(apiConfig);
 
 // Открытие попапа с изображением
 const openPopupImage = new PopupWithImage(imagePopup);
@@ -64,27 +68,23 @@ const popupWithAvatar = new PopupWithForm(avatarPopup, {
   },
 });
 
-// Рендер масива карточек
-const renderCard = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      renderCard.addItem(createCard(item));
+api.renderCards().then((res) => {
+  const renderCard = new Section(
+    {
+      items: res,
+      renderer: (cardData) => {
+        const card = new Card(cardData, '.template', {
+          handleCardClick: () => {
+            openPopupImage.open(cardData.link, cardData.name);
+          },
+        });
+        renderCard.addItem(card.generateCard());
+      },
     },
-  },
-  '.elements'
-);
-
-// Создание карточки с помощью класса
-function createCard(cardData) {
-  const card = new Card(cardData, '.template', {
-    handleCardClick: () => {
-      openPopupImage.open(cardData.link, cardData.cardName);
-    },
-  });
-  const cardElement = card.generateCard();
-  return cardElement;
-}
+    '.elements'
+  );
+  renderCard.renderItems();
+});
 
 // Функция открытия попапа профиля
 function openProlilePopup() {
@@ -121,4 +121,6 @@ openPopupImage.setEventListeners();
 popupWithCard.setEventListeners();
 popupWithProfile.setEventListeners();
 popupWithAvatar.setEventListeners();
-renderCard.renderItems();
+
+// Токен: 96508db4-2bdb-409e-a863-4987f404d514
+// Идентификатор группы: cohort-55
