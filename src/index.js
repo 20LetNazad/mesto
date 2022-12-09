@@ -45,11 +45,24 @@ const userInfo = new UserInfo(
   '.profile__avatar'
 );
 
-// Попап карточек
+// Создание элемента карточки
+const createCard = (cardData) => {
+  const card = new Card(cardData, '.template', {
+    handleCardClick: () => {
+      openPopupImage.open(cardData.link, cardData.name);
+    },
+  });
+  renderCards.addItem(card.generateCard());
+};
+
+// Попап добавления карточки на сервере
 const popupWithCard = new PopupWithForm(cardPopup, {
-  formSubmit: (data) => {
-    renderCard.addItem(createCard(data));
-    popupWithCard.close();
+  formSubmit: () => {
+    const inputValues = popupWithCard.getInputValues();
+    api.addCard(inputValues).then((cardData) => {
+      createCard(cardData);
+      popupWithCard.close();
+    });
   },
 });
 
@@ -57,8 +70,8 @@ const popupWithCard = new PopupWithForm(cardPopup, {
 const popupWithProfile = new PopupWithForm(profilePopup, {
   formSubmit: () => {
     const inputValues = popupWithProfile.getInputValues();
-    api.editProfile(inputValues).then((data) => {
-      userInfo.setUserInfo(data);
+    api.editProfile(inputValues).then((profileData) => {
+      userInfo.setUserInfo(profileData);
       popupWithProfile.close();
     });
   },
@@ -68,23 +81,18 @@ const popupWithProfile = new PopupWithForm(profilePopup, {
 const popupWithAvatar = new PopupWithForm(avatarPopup, {
   formSubmit: () => {
     const inputValues = popupWithAvatar.getInputValues();
-    api.editAvatar(inputValues).then((data) => {
-      userInfo.setUserAvatar(data);
+    api.editAvatar(inputValues).then((avatarData) => {
+      userInfo.setUserAvatar(avatarData);
       popupWithAvatar.close();
     });
   },
 });
 
-// Рендер карточек с сервера
+// Рендер карточек
 const renderCards = new Section(
   {
-    renderer: (item) => {
-      const card = new Card(item, '.template', {
-        handleCardClick: () => {
-          openPopupImage.open(item.name, item.link);
-        },
-      });
-      renderCards.addItem(card.generateCard());
+    renderer: (card) => {
+      createCard(card);
     },
   },
   '.elements'
@@ -117,7 +125,7 @@ api.userInfo().then((res) => {
   userInfo.setUserAvatar(res);
 });
 
-// Загрузка информации о карточках с сервера
+// Загрузка карточек с сервера
 api.renderCards().then((res) => {
   renderCards.renderItems(res);
 });
@@ -137,6 +145,3 @@ openPopupImage.setEventListeners();
 popupWithCard.setEventListeners();
 popupWithProfile.setEventListeners();
 popupWithAvatar.setEventListeners();
-
-// Токен: 96508db4-2bdb-409e-a863-4987f404d514
-// Идентификатор группы: cohort-55

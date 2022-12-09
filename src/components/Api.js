@@ -24,23 +24,34 @@ export default class Api {
     }).then(this._resStatus);
   }
 
-  editProfile(info) {
+  editProfile(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: info.name,
-        about: info.about,
+        name: data.name,
+        about: data.about,
       }),
     }).then(this._resStatus);
   }
 
-  editAvatar(info) {
+  editAvatar(data) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: info.avatar,
+        avatar: data.avatar,
+      }),
+    }).then(this._resStatus);
+  }
+
+  addCard(data) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.cardName,
+        link: data.link,
       }),
     }).then(this._resStatus);
   }
