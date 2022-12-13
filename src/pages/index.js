@@ -1,13 +1,13 @@
-import './pages/index.css';
+import './index.css';
 
-import Section from './components/Section.js';
-import Card from './components/Card.js';
-import FormValidator from './components/FormValidator.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithDelete from './components/PopupWithDelete.js';
-import Api from './components/Api.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithDelete from '../components/PopupWithDelete.js';
+import Api from '../components/Api.js';
 import {
   validationConfig,
   profilePopup,
@@ -23,7 +23,7 @@ import {
   buttonOpenAvatar,
   nameInput,
   jobInput,
-} from './utils/constants';
+} from '../utils/constants';
 
 // API
 const api = new Api({
