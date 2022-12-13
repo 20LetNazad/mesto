@@ -11,6 +11,7 @@
     border: 0;
     transition: 0.2s;
     cursor: pointer;
+    display: none;
 }
 
 .element__delete:hover {

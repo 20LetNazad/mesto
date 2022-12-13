@@ -6,6 +6,7 @@ import FormValidator from './components/FormValidator.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import UserInfo from './components/UserInfo.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import PopupWithDelete from './components/PopupWithDelete.js';
 import Api from './components/Api.js';
 import {
   validationConfig,
@@ -13,19 +14,32 @@ import {
   cardPopup,
   imagePopup,
   avatarPopup,
+  deletePopup,
   formCard,
   formEditProfile,
   formAvatar,
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
   buttonOpenAvatar,
-  apiConfig,
   nameInput,
   jobInput,
 } from './utils/constants';
 
 // API
-const api = new Api(apiConfig);
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-55',
+  userId: '5c67497edf177b6be73287c3',
+  headers: {
+    authorization: '96508db4-2bdb-409e-a863-4987f404d514',
+    'Content-Type': 'application/json',
+  },
+});
+
+// Айди юзера
+const userId = api._userId;
+
+// Открытие попапа с удалением карточки
+const deleteCard = new PopupWithDelete(deletePopup);
 
 // Открытие попапа с изображением
 const openPopupImage = new PopupWithImage(imagePopup);
@@ -47,9 +61,16 @@ const userInfo = new UserInfo(
 
 // Создание элемента карточки
 const createCard = (cardData) => {
-  const card = new Card(cardData, '.template', {
+  const card = new Card(cardData, userId, '.template', {
     handleCardClick: () => {
       openPopupImage.open(cardData.link, cardData.name);
+    },
+    handleCardDelete: () => {
+      deleteCard.open();
+      deleteCard.submitCardDelete(() => {
+        card.handleDelete();
+        api.removeCard(card.cardId);
+      });
     },
   });
   renderCards.addItem(card.generateCard());
@@ -60,8 +81,7 @@ const popupWithCard = new PopupWithForm(cardPopup, {
   formSubmit: () => {
     const inputValues = popupWithCard.getInputValues();
     api.addCard(inputValues).then((cardData) => {
-      createCard(cardData);
-      popupWithCard.close();
+      createCard(cardData), popupWithCard.close();
     });
   },
 });
@@ -145,3 +165,4 @@ openPopupImage.setEventListeners();
 popupWithCard.setEventListeners();
 popupWithProfile.setEventListeners();
 popupWithAvatar.setEventListeners();
+deleteCard.setEventListeners();

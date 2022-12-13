@@ -1,12 +1,3 @@
-// Конфиг API
-const apiConfig = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-55',
-  headers: {
-    authorization: '96508db4-2bdb-409e-a863-4987f404d514',
-    'Content-Type': 'application/json',
-  },
-};
-
 // Конфиг для валидации
 const validationConfig = {
   formSelector: '.popup__form',
@@ -22,6 +13,7 @@ const profilePopup = document.querySelector('.profile-popup');
 const cardPopup = document.querySelector('.card-popup');
 const imagePopup = document.querySelector('.image-popup');
 const avatarPopup = document.querySelector('.avatar-popup');
+const deletePopup = document.querySelector('.confirm-popup');
 
 // Формы
 const formCard = document.forms['add-place'];
@@ -48,13 +40,13 @@ export {
   cardPopup,
   imagePopup,
   avatarPopup,
+  deletePopup,
   formCard,
   formEditProfile,
   formAvatar,
   buttonOpenCardPopup,
   buttonOpenProfilePopup,
   buttonOpenAvatar,
-  apiConfig,
   nameInput,
   jobInput,
 };

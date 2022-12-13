@@ -2,6 +2,7 @@ export default class Api {
   constructor(config) {
     this._headers = config.headers;
     this._url = config.url;
+    this._userId = config.userId;
   }
 
   _resStatus(res) {
@@ -53,6 +54,13 @@ export default class Api {
         name: data.cardName,
         link: data.link,
       }),
+    }).then(this._resStatus);
+  }
+
+  removeCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
     }).then(this._resStatus);
   }
 }
