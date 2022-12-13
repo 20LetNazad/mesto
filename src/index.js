@@ -72,6 +72,18 @@ const createCard = (cardData) => {
         api.removeCard(card.cardId);
       });
     },
+    handleRemoveLike: () => {
+      api.removeLike(cardData._id).then((data) => {
+        card.likeCounter(data.likes);
+        card.handleLikeClick();
+      });
+    },
+    handleAddlike: () => {
+      api.addLike(cardData._id).then((data) => {
+        card.likeCounter(data.likes);
+        card.handleLikeClick();
+      });
+    },
   });
   renderCards.addItem(card.generateCard());
 };
