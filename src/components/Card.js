@@ -19,7 +19,7 @@ export default class Card {
     this._handleRemoveLike = handleRemoveLike;
   }
 
-  // Получение темплейта для карточек
+  /** Получение темплейта для карточек */
   _getTemplateElement() {
     const cardElement = document
       .querySelector(this._templateSelector)
@@ -29,7 +29,7 @@ export default class Card {
     return cardElement;
   }
 
-  // Установка слушателей
+  /** Установка слушателей */
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       this._changeLikeStatus();
@@ -44,32 +44,43 @@ export default class Card {
     });
   }
 
-  // показать лайки
+  /** Проверка наличия текущего пользователя в массиве лайков */
+  _isLiked() {
+    return this._like.some((item) => item._id === this._userId);
+  }
+
+  /** Постановка, удаление лайков */
   _changeLikeStatus() {
-    if (this._likeButton.classList.contains('element__like_active')) {
+    if (this._isLiked()) {
       this._handleRemoveLike();
     } else {
       this._handleAddlike();
     }
   }
 
-  // Отображение количества лайков
-  likeCounter(likes) {
+  /** Обновление счетчика лайков */
+  _updateLikeCounter(likes) {
     this._likeCounter.textContent = likes.length;
+    if (this._isLiked()) {
+      this._likeButton.classList.add('element__like_active');
+    } else {
+      this._likeButton.classList.remove('element__like_active');
+    }
   }
 
-  // Лайк карточек
-  handleLikeClick() {
-    this._likeButton.classList.toggle('element__like_active');
+  /** Обновление массива лайков */
+  updateLikeData(data) {
+    this._like = data.likes;
+    this._updateLikeCounter(data.likes);
   }
 
-  // Удаление карточек
+  /** Удаление карточек */
   handleDelete() {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
-  // Создание карточки
+  /** Создание карточки */
   generateCard() {
     this._cardElement = this._getTemplateElement();
     this._deleteElement = this._cardElement.querySelector('.element__delete');
@@ -82,10 +93,7 @@ export default class Card {
     this._templateImage.src = this._link;
     this._templateImage.alt = this._name;
 
-    this._likeCounter.textContent = this._like.length;
-    if (this._like.find((like) => like._id === this._userId)) {
-      this._likeButton.classList.add('element__like_active');
-    }
+    this._updateLikeCounter(this._like);
 
     if (this._cardData.owner._id === this._userId) {
       this._deleteElement.classList.add('element__delete_visible');

@@ -9,7 +9,7 @@ export default class FormValidator {
     this._inputList = this._form.querySelectorAll(this._settings.inputSelector);
   }
 
-  // Проверка на валидность
+  /** Проверка на валидность */
   _checkInputValidity(inputElement) {
     if (inputElement.checkValidity()) {
       this._hideInputError(inputElement);
@@ -18,26 +18,26 @@ export default class FormValidator {
     }
   }
 
-  // Показ ошибки при невалидности
+  /** Показ ошибки при невалидности */
   _showInputError(inputElement) {
     this._errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._settings.errorClass);
     this._errorElement.textContent = inputElement.validationMessage;
   }
 
-  // Убрать ошибку при валидности
+  /** Убрать ошибку при валидности */
   _hideInputError(inputElement) {
     this._errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._settings.errorClass);
     this._errorElement.textContent = '';
   }
 
-  // Проверка на валидность для кнопки
+  /** Проверка на валидность для кнопки */
   _hasInvalidInput() {
     return !this._form.checkValidity();
   }
 
-  // Изменение состояния кнопки
+  /** Изменение состояния кнопки */
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this.disableButton();
@@ -47,7 +47,7 @@ export default class FormValidator {
     }
   }
 
-  // Обработчики событий
+  /** Обработчики событий */
   _setEventListeners() {
     this._toggleButtonState(this._submitButton);
     this._inputList.forEach((inputElement) => {
@@ -58,18 +58,18 @@ export default class FormValidator {
     });
   }
 
-  // Отключение кнопки
+  /** Отключение кнопки */
   disableButton() {
     this._submitButton.classList.add(this._settings.inactiveButtonClass);
     this._submitButton.setAttribute('disabled', true);
   }
 
-  // Включение валидации
+  /** Включение валидации */
   enableValidation() {
-    this._setEventListeners(this._form);
+    this._setEventListeners();
   }
 
-  // Перезагрузка валидации
+  /** Перезагрузка валидации */
   resetValidation() {
     this._toggleButtonState();
 

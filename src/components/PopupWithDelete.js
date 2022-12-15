@@ -8,6 +8,7 @@ export default class PopupWithDelete extends Popup {
     );
   }
 
+  /** Установка слушателей */
   setEventListeners() {
     super.setEventListeners();
     this._submitButton.addEventListener('click', (evt) => {
@@ -17,6 +18,7 @@ export default class PopupWithDelete extends Popup {
     });
   }
 
+  /** Удаление карточки */
   submitCardDelete(deleteCardCallback) {
     this._deleteCard = deleteCardCallback;
   }

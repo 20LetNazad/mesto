@@ -12,7 +12,8 @@ export default class PopupWithForm extends Popup {
     this._buttonTextContent = this._submitButton.textContent;
   }
 
-  getInputValues() {
+  /** Получение значений инпутов */
+  _getInputValues() {
     const inputValues = {};
     this._inputList.forEach((input) => {
       inputValues[input.name] = input.value;
@@ -20,20 +21,17 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  /** Установка слушателей */
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._formSubmit(this.getInputValues());
+      this._formSubmit(this._getInputValues());
       this._submitButton.textContent = `${this._buttonTextContent}...`;
     });
   }
 
-  open() {
-    super.open();
-    this._submitButton.textContent = `${this._buttonTextContent}`;
-  }
-
+  /** Сброс формы при закрытии */
   close() {
     super.close();
     this._popupForm.reset();

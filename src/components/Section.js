@@ -4,13 +4,20 @@ export default class Section {
     this._container = document.querySelector(containerElement);
   }
 
+  /** Рендек карточек */
   renderItems(res) {
-    res.reverse().forEach((item) => {
+    res.forEach((item) => {
       this._renderer(item);
     });
   }
 
+  /** Добавление карточек с помощью рендера */
+  addItems(items) {
+    this._container.prepend(items);
+  }
+
+  /** Добавление карточек через попап */
   addItem(cardItem) {
-    this._container.prepend(cardItem);
+    this._container.append(cardItem);
   }
 }

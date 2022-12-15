@@ -10,6 +10,7 @@ export default class PopupWithImage extends Popup {
     );
   }
 
+  /** Открытие попапа с изображением */
   open(link, cardName) {
     this._imagePopupImg.src = link;
     this._imagePopupImg.alt = cardName;
