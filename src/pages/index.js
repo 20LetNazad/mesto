@@ -39,10 +39,10 @@ const api = new Api({
 const userId = api._userId;
 
 // Открытие попапа с удалением карточки
-const deleteCard = new PopupWithDelete(deletePopup);
+const popupConfirmDeleteCard = new PopupWithDelete(deletePopup);
 
 // Открытие попапа с изображением
-const openPopupImage = new PopupWithImage(imagePopup);
+const popupOpenImage = new PopupWithImage(imagePopup);
 
 // Валидация форм
 const profileFormValidator = new FormValidator(
@@ -63,11 +63,11 @@ const userInfo = new UserInfo(
 const createCard = (cardData) => {
   const card = new Card(cardData, userId, '.template', {
     handleCardClick: () => {
-      openPopupImage.open(cardData.link, cardData.name);
+      popupOpenImage.open(cardData.link, cardData.name);
     },
     handleCardDelete: () => {
-      deleteCard.open();
-      deleteCard.submitCardDelete(() => {
+      popupConfirmDeleteCard.open();
+      popupConfirmDeleteCard.submitCardDelete(() => {
         card.handleDelete();
         api.removeCard(card.cardId);
       });
@@ -173,8 +173,8 @@ buttonOpenCardPopup.addEventListener('click', openCardPopup);
 buttonOpenAvatar.addEventListener('click', openAvatarEdit);
 
 // Установка слушателей
-openPopupImage.setEventListeners();
+popupOpenImage.setEventListeners();
 popupWithCard.setEventListeners();
 popupWithProfile.setEventListeners();
 popupWithAvatar.setEventListeners();
-deleteCard.setEventListeners();
+popupConfirmDeleteCard.setEventListeners();
